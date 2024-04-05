@@ -1,41 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public GameObject enemyPrefab;
+    public float      spawnRadius  = 10f;
+    public float      minSpawnTime = 1f;
+    public float      maxSpawnTime = 3f;
+
+    private float nextSpawnTime;
+
     void Start()
     {
-        StartCoroutine("SpawnEnemy");
-        Debug.Log("Start Spawn");
+        // 初始化下一次生成时间
+        nextSpawnTime = Time.time + Random.Range(minSpawnTime, maxSpawnTime);
     }
 
-    // Update is called once per frame
-    public float spawnLeastWait;
-    public float spawnMostWait;
-    private float spawnWait;
     void Update()
     {
-        spawnWait = spawnMostWait - spawnLeastWait;
+        // 如果当前时间大于等于下一次生成时间
+        if (Time.time >= nextSpawnTime)
+        {
+            // 生成敌人
+            SpawnEnemy();
+
+            // 计算下一次生成时间
+            nextSpawnTime = Time.time + Random.Range(minSpawnTime, maxSpawnTime);
+        }
     }
 
-    private int        xPos;
-    private int        yPos;
-    private int        zPos;
-    public int        enemyCount;
-    public GameObject enemy;
-    IEnumerator SpawnEnemy()
+    void SpawnEnemy()
     {
-        while (enemyCount<10)
-        {
-            xPos = Random.Range(-10, 10);
-            yPos = Random.Range(-10, 10);
-            zPos = Random.Range(-10, 10);
-            Instantiate(enemy, this.transform.position + new Vector3(xPos, yPos, zPos),Quaternion.identity);
-            yield return new WaitForSeconds(spawnWait);
-            enemyCount += 1;
-            Debug.Log(enemyCount);
-        }
+        // 随机生成位置
+        Vector3 spawnPosition = transform.position + Random.insideUnitSphere * spawnRadius;
+
+        // 生成敌人
+        Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
     }
 }
