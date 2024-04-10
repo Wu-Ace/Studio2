@@ -20,7 +20,9 @@ public class SoundManager : MonoBehaviour
     }
     public void PlaySound(AudioClip clip, float volume)
     {
+        // _sfxSource.pitch = pitch;
         _sfxSource.PlayOneShot(clip, volume);
     }
+
 
 }
