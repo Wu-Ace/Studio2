@@ -35,6 +35,7 @@ public class EnemyController : MonoBehaviour
             Debug.Log("Enemy is being hurt");
             Destroy(this.gameObject);
         }
+        Debug.Log("EnemyController:EnemyBeingHurt");
     }
 
     private void OnDestroy()

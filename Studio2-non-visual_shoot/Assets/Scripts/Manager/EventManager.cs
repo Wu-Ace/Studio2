@@ -27,6 +27,7 @@ namespace Manager
             {
                 onEnemyHit(enemy);
             }
+            Debug.Log("EventManagaer:EnemyHit");
         }
 
         public event Action onPlayerShoot;
@@ -37,6 +38,7 @@ namespace Manager
             {
                 onPlayerShoot();
             }
+            Debug.Log("EventManager:PlayerShoot");
         }
         public event Action<AudioClip, float> onPlaySound;
 

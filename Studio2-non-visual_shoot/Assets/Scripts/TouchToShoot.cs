@@ -11,6 +11,7 @@ public class TouchToShoot : MonoBehaviour
         if (Input.touchCount == 1)
         {
             EventManager.instance.PlayerShoot();
+            // Debug.Log("touch");
         }
     }
 }
