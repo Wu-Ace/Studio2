@@ -50,6 +50,7 @@ public class EnemyController : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             PlayerController.Health--;
+            EnemySpawner.EnemyNumber--;
             Debug.Log("Player Health: " + PlayerController.Health);
             EventManager.instance.PlayerHurt(PlayerHurtClip,1);
             Destroy(this.gameObject);

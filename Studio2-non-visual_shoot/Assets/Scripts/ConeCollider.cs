@@ -3,18 +3,22 @@ using UnityEngine;
 using System;
 
 public class ConeCast : MonoBehaviour {
-    public                   float     radius   = 5;
-    public                   float     SlowAngle    = 30;
-    public                   float     FastAngle    = 10;
+    public float radius;
+    public float SlowAngle;
+    public float FastAngle;
+    public float warmRadius;
 
     // public                   float     distance = 10;
     public                   LayerMask enemyLayerMask; // 用于过滤敌人的LayerMask
     [SerializeField] private AudioClip _slowClip;
-    [SerializeField] private AudioClip _fastClip;
+
+    [SerializeField] private AudioClip _warmClip;
+    // [SerializeField] private AudioClip _fastClip;
     // public                   float     exponent = 2.0f; // 设置指数值
 
     void Start() {
         StartCoroutine(DetectSound());
+        StartCoroutine(DetectEnemyCome());
     }
 
     IEnumerator DetectSound() {
@@ -41,6 +45,17 @@ public class ConeCast : MonoBehaviour {
                 //     // Debug.Log(volume);
                 //     SoundManager.instance.PlaySound(_fastClip,volume);
                 // }
+            }
+            yield return new WaitForSeconds(1);
+        }
+    }
+    IEnumerator DetectEnemyCome() {
+        while(true){
+            Collider[] hits = Physics.OverlapSphere(transform.position, warmRadius, enemyLayerMask);
+
+
+            foreach(Collider hit in hits){
+                SoundManager.instance.PlaySound(_warmClip,1);
             }
             yield return new WaitForSeconds(1);
         }

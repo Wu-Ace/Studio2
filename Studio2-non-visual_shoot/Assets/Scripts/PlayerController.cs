@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private float     new_y;
     private float     currentDistance = 0;
 
+    public bool isLose;
+
 
     [SerializeField] private AudioClip _shootClip;
     [SerializeField] private AudioClip _reloadClip;
@@ -31,6 +33,7 @@ public class PlayerController : MonoBehaviour
         EventManager.instance.onPlayerShoot += PlayerShoot;
         currentBullet                       =  bulletMag;
         PlayerKillEnemyNum                  =  0;
+        isLose                              =  false;
     }
 
     public void Update()
@@ -94,9 +97,10 @@ public class PlayerController : MonoBehaviour
 
     public void CheckHealth()
     {
-        if (Health <= 0)
+        if (Health <= 0&&!isLose)
         {
-            EventManager.instance.PlayerDie(_dieClip,1);
+            EventManager.instance.PlayerDie(_dieClip,0.7f);
+            isLose = true;
         }
     }
 
