@@ -7,6 +7,13 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
+    EnemySpawner EnemySpawner;
+
+    private void Awake()
+    {
+        EnemySpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>();
+    }
+
     private void Start()
     {
         //<summary>
@@ -22,6 +29,7 @@ public class EnemyController : MonoBehaviour
 
     public Transform player;     // Reference to the player's position
     public float     speed = 1f; // Speed at which the enemy moves towards the player
+    public AudioClip DefeatedClip;
     private void Update()
     {
         // Move our position a step closer to the target.
@@ -34,7 +42,9 @@ public class EnemyController : MonoBehaviour
         {
             Debug.Log("Enemy is being hurt");
             Destroy(this.gameObject);
+            EnemySpawner.EnemyNumber--;
         }
+        SoundManager.instance.PlaySound(DefeatedClip, 1);
         Debug.Log("EnemyController:EnemyBeingHurt");
     }
 

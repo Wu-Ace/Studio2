@@ -35,8 +35,7 @@ public class ConeCast : MonoBehaviour {
                     // Debug.Log(volume);
                     SoundManager.instance.PlaySound(_slowClip,volume);
                 }
-                else if(FastAngle>angleToObject){
-                    // Debug.Log("Object detected! Distance: " + distanceToObject + " Angle: " + angleToObject);
+                else if(hit.gameObject.tag == "Enemy" && angleToObject <= FastAngle){                    // Debug.Log("Object detected! Distance: " + distanceToObject + " Angle: " + angleToObject);
                     float volume = 1 - (angleToObject / FastAngle);
                     float pitch  = 3 * volume;
                     // Debug.Log(volume);

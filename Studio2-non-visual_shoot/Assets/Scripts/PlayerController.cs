@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Debug.Log(currentBullet);
-        if (Physics.Raycast(ray, out hit, 1000f, enemyLayerMask))
+        if (Physics.Raycast(ray, out hit, 1000f, enemyLayerMask)&&currentBullet>0)
         {
             Debug.DrawLine(transform.position, hit.point, Color.yellow);
             Debug.Log("HitName"+hit.transform.gameObject.name);
@@ -62,7 +62,7 @@ public class PlayerController : MonoBehaviour
         currentDistance = new_y - old_y;
         old_y           = new_y;
 
-        if (currentDistance > 0.75 && Input.deviceOrientation == DeviceOrientation.Portrait)
+        if (currentDistance > 0.5f && Input.deviceOrientation == DeviceOrientation.Portrait)
         {
             Debug.Log("Reload");
             currentBullet = bulletMag;
