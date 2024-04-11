@@ -15,9 +15,10 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this);
         }
-        instance = this;
-        EventManager.instance.onPlaySound += PlaySound;
-        EventManager.instance.onPlayerDie += PlayerDie;
+        instance                           =  this;
+        EventManager.instance.onPlaySound  += PlaySound;
+        EventManager.instance.onPlayerDie  += PlaySound;
+        EventManager.instance.onPlayerHurt += PlaySound;
     }
     public void PlaySound(AudioClip clip, float volume)
     {

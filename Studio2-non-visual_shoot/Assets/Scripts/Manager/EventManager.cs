@@ -56,5 +56,15 @@ namespace Manager
             }
         }
 
+        public event Action<AudioClip, float> onPlayerHurt;
+
+        public void PlayerHurt(AudioClip clip, float volume)
+        {
+            if (onPlayerHurt != null)
+            {
+                onPlayerHurt(clip, volume);
+            }
+        }
+
     }
 }

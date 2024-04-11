@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public int       bulletMag = 10;
     public int       currentBullet;
     public int       Health = 3;
+    public int       PlayerKillEnemyNum;
 
 
     private float     old_y = 0;
@@ -22,12 +23,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip _shootClip;
     [SerializeField] private AudioClip _reloadClip;
     [SerializeField] private AudioClip _emptyClip;
-    [SerializeField] private AudioClip _hurtClip;
+    [SerializeField] private AudioClip _dieClip;
+    [SerializeField] private AudioClip _aimClip;
 
     public void Start()
     {
         EventManager.instance.onPlayerShoot += PlayerShoot;
-        currentBullet = bulletMag;
+        currentBullet                       =  bulletMag;
+        PlayerKillEnemyNum                  =  0;
     }
 
     public void Update()
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.yellow);
         CheckIfReload();
         CheckHealth();
+        CheckIfAim();
     }
 
     public void PlayerShoot()
@@ -45,20 +49,31 @@ public class PlayerController : MonoBehaviour
         if (currentBullet>0)
         {
             SoundManager.instance.PlaySound(_shootClip, 1);
+            if (Physics.Raycast(ray, out hit, 1000f, enemyLayerMask)&&currentBullet>0)
+            {
+                Debug.DrawLine(transform.position, hit.point, Color.yellow);
+                Debug.Log("HitName"+hit.transform.gameObject.name);
+                EventManager.instance.EnemyHit(hit.transform.gameObject);
+                Handheld.Vibrate();
+            }
             currentBullet --;
         }
         else
         {
-            SoundManager.instance.PlaySound(_emptyClip, 1);
+            EventManager.instance.PlaySound(_emptyClip, 1);
         }
 
         Debug.Log(currentBullet);
-        if (Physics.Raycast(ray, out hit, 1000f, enemyLayerMask)&&currentBullet>0)
+
+    }
+
+    public void CheckIfAim()
+    {
+        Ray        ray = new Ray(transform.position,  transform.forward);
+        RaycastHit hit;
+        if(Physics.Raycast(ray, out hit, 1000f, enemyLayerMask))
         {
-            Debug.DrawLine(transform.position, hit.point, Color.yellow);
-            Debug.Log("HitName"+hit.transform.gameObject.name);
-            EventManager.instance.EnemyHit(hit.transform.gameObject);
-            Handheld.Vibrate();
+            EventManager.instance.PlaySound(_aimClip, 1);
         }
     }
 
@@ -81,7 +96,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Health <= 0)
         {
-            EventManager.instance.PlayerDie(_hurtClip,1);
+            EventManager.instance.PlayerDie(_dieClip,1);
         }
     }
 

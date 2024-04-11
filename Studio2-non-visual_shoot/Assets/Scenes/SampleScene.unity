@@ -683,6 +683,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!1001 &830637972
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 57.133995
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 36.557186
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3398323579593537699, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8881814564871859481, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
+      propertyPath: m_Name
+      value: Cube (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
 --- !u!1 &832043975
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,10 +873,12 @@ MonoBehaviour:
   bulletMag: 3
   currentBullet: 3
   Health: 3
+  PlayerKillEnemyNum: 0
   _shootClip: {fileID: 8300000, guid: 3969824b516c84540b81140a9cf6ef5a, type: 3}
   _reloadClip: {fileID: 8300000, guid: 444f42b17dbfad442a4ef929bf67f80e, type: 3}
   _emptyClip: {fileID: 8300000, guid: 4b3c757c192a8cd4bbd93d02fd445815, type: 3}
-  _hurtClip: {fileID: 8300000, guid: 37b81ee0a0b0e2245a5567c03b665883, type: 3}
+  _dieClip: {fileID: 8300000, guid: 117b04f37f4dbc745aefbd8cd89a8034, type: 3}
+  _aimClip: {fileID: 8300000, guid: 607146d2f3702ce48b1df6935c9aba50, type: 3}
 --- !u!114 &832043982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1053,14 +1112,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.04, y: 11.94, z: 13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 832043980}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,10 +1466,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8881814564871859481, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
   spawnRadius: 20
-  minSpawnTime: 2
-  maxSpawnTime: 5
-  EnemyMaxNumber: 2
+  minSpawnTime: 5
+  maxSpawnTime: 10
   EnemyNumber: 0
+  EnemyTrueMaxNumber: 0
+  PlayerController: {fileID: 0}
+  PlayerKillEnemyNum: 0
 --- !u!4 &1634794989
 Transform:
   m_ObjectHideFlags: 0
@@ -1516,3 +1577,4 @@ SceneRoots:
   - {fileID: 992322655}
   - {fileID: 1634794989}
   - {fileID: 2143902806}
+  - {fileID: 830637972}

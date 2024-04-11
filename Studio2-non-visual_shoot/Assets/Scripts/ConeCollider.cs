@@ -35,12 +35,12 @@ public class ConeCast : MonoBehaviour {
                     // Debug.Log(volume);
                     SoundManager.instance.PlaySound(_slowClip,volume);
                 }
-                else if(hit.gameObject.tag == "Enemy" && angleToObject <= FastAngle){                    // Debug.Log("Object detected! Distance: " + distanceToObject + " Angle: " + angleToObject);
-                    float volume = 1 - (angleToObject / FastAngle);
-                    float pitch  = 3 * volume;
-                    // Debug.Log(volume);
-                    SoundManager.instance.PlaySound(_fastClip,volume);
-                }
+                // else if(hit.gameObject.tag == "Enemy" ){                    // Debug.Log("Object detected! Distance: " + distanceToObject + " Angle: " + angleToObject);
+                //     float volume = 1 - (angleToObject / FastAngle);
+                //     float pitch  = 3 * volume;
+                //     // Debug.Log(volume);
+                //     SoundManager.instance.PlaySound(_fastClip,volume);
+                // }
             }
             yield return new WaitForSeconds(1);
         }

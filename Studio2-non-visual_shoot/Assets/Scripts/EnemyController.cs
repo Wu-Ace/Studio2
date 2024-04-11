@@ -25,6 +25,7 @@ public class EnemyController : MonoBehaviour
     public Transform player;     // Reference to the player's position
     public float     speed = 1f; // Speed at which the enemy moves towards the player
     public AudioClip DefeatedClip;
+    public AudioClip PlayerHurtClip;
     private void Update()
     {
         // Move our position a step closer to the target.
@@ -35,12 +36,13 @@ public class EnemyController : MonoBehaviour
     {
         if (enemy == this.gameObject)
         {
+            PlayerController.PlayerKillEnemyNum++;
+            SoundManager.instance.PlaySound(DefeatedClip, 0.5f);
+            Debug.Log("EnemyController:EnemyBeingHurt");
             Debug.Log("Enemy is being hurt");
-            Destroy(this.gameObject);
             EnemySpawner.EnemyNumber--;
+            Destroy(this.gameObject);
         }
-        SoundManager.instance.PlaySound(DefeatedClip, 1);
-        Debug.Log("EnemyController:EnemyBeingHurt");
     }
 
     private void OnCollisionEnter(Collision other)
@@ -49,6 +51,7 @@ public class EnemyController : MonoBehaviour
         {
             PlayerController.Health--;
             Debug.Log("Player Health: " + PlayerController.Health);
+            EventManager.instance.PlayerHurt(PlayerHurtClip,1);
             Destroy(this.gameObject);
         }
     }
