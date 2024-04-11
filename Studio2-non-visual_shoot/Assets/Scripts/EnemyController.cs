@@ -8,23 +8,18 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     EnemySpawner EnemySpawner;
+    PlayerController PlayerController;
 
     private void Awake()
     {
-        EnemySpawner = GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>();
+        EnemySpawner     = GameObject.FindWithTag("EnemySpawner").GetComponent<EnemySpawner>();
+        PlayerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     private void Start()
     {
-        //<summary>
-        //事件订阅
-        //</summary>
         EventManager.instance.onEnemyHit += EnemyBeingHurt;
-
-        //<summary>
-        //初始化
-        //</summary>
-        player = GameObject.FindWithTag("Player").transform;
+        player                           =  GameObject.FindWithTag("Player").transform;
     }
 
     public Transform player;     // Reference to the player's position
@@ -46,6 +41,16 @@ public class EnemyController : MonoBehaviour
         }
         SoundManager.instance.PlaySound(DefeatedClip, 1);
         Debug.Log("EnemyController:EnemyBeingHurt");
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            PlayerController.Health--;
+            Debug.Log("Player Health: " + PlayerController.Health);
+            Destroy(this.gameObject);
+        }
     }
 
     private void OnDestroy()

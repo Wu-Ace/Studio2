@@ -695,10 +695,10 @@ GameObject:
   - component: {fileID: 832043979}
   - component: {fileID: 832043978}
   - component: {fileID: 832043983}
-  - component: {fileID: 832043977}
   - component: {fileID: 832043982}
   - component: {fileID: 832043981}
   - component: {fileID: 832043976}
+  - component: {fileID: 832043984}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -733,27 +733,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &832043977
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 832043975}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Size: {x: 162.49654, y: 48.05687, z: 38.620712}
-  m_Center: {x: 0.2476654, y: -1.4557381, z: 20.19083}
 --- !u!23 &832043978
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -835,10 +814,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   bulletMag: 3
-  currentBullet: 0
+  currentBullet: 3
+  Health: 3
   _shootClip: {fileID: 8300000, guid: 3969824b516c84540b81140a9cf6ef5a, type: 3}
   _reloadClip: {fileID: 8300000, guid: 444f42b17dbfad442a4ef929bf67f80e, type: 3}
   _emptyClip: {fileID: 8300000, guid: 4b3c757c192a8cd4bbd93d02fd445815, type: 3}
+  _hurtClip: {fileID: 8300000, guid: 37b81ee0a0b0e2245a5567c03b665883, type: 3}
 --- !u!114 &832043982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -872,6 +853,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AccelermeterValue: {x: 0, y: 0, z: 0}
+--- !u!65 &832043984
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832043975}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0000002, y: 1, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &860912544
 GameObject:
   m_ObjectHideFlags: 0
@@ -1404,7 +1406,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 8881814564871859481, guid: 4feaa4af04a55af4283f0dbb62247aa5, type: 3}
-  spawnRadius: 36.53
+  spawnRadius: 20
   minSpawnTime: 2
   maxSpawnTime: 5
   EnemyMaxNumber: 2

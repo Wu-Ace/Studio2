@@ -17,10 +17,16 @@ public class SoundManager : MonoBehaviour
         }
         instance = this;
         EventManager.instance.onPlaySound += PlaySound;
+        EventManager.instance.onPlayerDie += PlayerDie;
     }
     public void PlaySound(AudioClip clip, float volume)
     {
         // _sfxSource.pitch = pitch;
+        _sfxSource.PlayOneShot(clip, volume);
+    }
+
+    public void PlayerDie(AudioClip clip, float volume)
+    {
         _sfxSource.PlayOneShot(clip, volume);
     }
 

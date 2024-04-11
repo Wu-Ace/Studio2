@@ -8,15 +8,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public  LayerMask enemyLayerMask;
-    public  int       bulletMag = 10;
-    public  int       currentBullet;
+    public LayerMask enemyLayerMask;
+    public int       bulletMag = 10;
+    public int       currentBullet;
+    public int       Health = 3;
+
+
     private float     old_y = 0;
     private float     new_y;
     private float     currentDistance = 0;
+
+
     [SerializeField] private AudioClip _shootClip;
     [SerializeField] private AudioClip _reloadClip;
     [SerializeField] private AudioClip _emptyClip;
+    [SerializeField] private AudioClip _hurtClip;
 
     public void Start()
     {
@@ -26,8 +32,9 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
-        // Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.yellow);
+        Debug.DrawLine(transform.position, transform.position + transform.forward * 10, Color.yellow);
         CheckIfReload();
+        CheckHealth();
     }
 
     public void PlayerShoot()
@@ -66,7 +73,15 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("Reload");
             currentBullet = bulletMag;
-            SoundManager.instance.PlaySound(_reloadClip, 1);
+            EventManager.instance.PlaySound(_reloadClip, 1);
+        }
+    }
+
+    public void CheckHealth()
+    {
+        if (Health <= 0)
+        {
+            EventManager.instance.PlayerDie(_hurtClip,1);
         }
     }
 

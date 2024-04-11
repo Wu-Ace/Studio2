@@ -47,5 +47,14 @@ namespace Manager
             onPlaySound?.Invoke(clip, volume);
         }
 
+        public event Action<AudioClip, float> onPlayerDie;
+        public void PlayerDie(AudioClip clip,float volume)
+        {
+            if (onPlayerDie != null)
+            {
+                onPlayerDie(clip,volume);
+            }
+        }
+
     }
 }
